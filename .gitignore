@@ -351,3 +351,6 @@ MigrationBackup/
 
 #PyCharm
 .idea
+
+#Environment values
+.env
