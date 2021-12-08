@@ -27,5 +27,9 @@ def random_movie_id():
         lista.append(idt)
 
     leffa = random.choice(lista)
-
+    print(leffa)
     return leffa
+
+# kommentoidaan tämä pois (vain testausta varten tehty)
+# if __name__=="__main__":
+#     random_movie_id()
