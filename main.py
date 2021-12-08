@@ -12,8 +12,17 @@ def select_length():
     return pituus    
 
 # funktio etsii top 250 listasta annettuun pituuteen sopivaa elokuvaa
-def check_movie_length():  
-    pituus = select_length()
+def check_movie_length(request):
+
+    request_json = request.get_json()
+    
+    if request.args and 'length' in request.args:
+        pituus = int(request.args.get('length'))
+    elif request_json and 'length' in request_json:
+        pituus = int(request_json['length'])
+    else:
+        pituus = 120
+    
     lista = random_movie_id()
 
     laskuri = 50
@@ -40,10 +49,11 @@ def check_movie_length():
         # jos valittu satunnainen elokuva mahtuu annetun pituuden välille,
         # tulostetaan elokuvan nimi, pituus ja imdb-pisteet
         elif pituus >= elokuvan_pituus:
+
             print(f"Katso elokuva: {elokuva_fulltitle}\nPituus: {elokuvan_pituus} minuuttia, eli {elokuvan_pituus_tunteina}\nIMDB-pisteet: {imdb_rating}/10")
-            return elokuva_title
+            return f"{{ imdb_id: {leffa_id}, title: {elokuva_title}, lenInMin: {elokuvan_pituus}, lenInHrs: {elokuvan_pituus_tunteina}, imdb_rating: {imdb_rating}/10 }} "
     
     # jos laskuri menee nollaan, eikä sopivan pituista elokuvaa löydy    
-    print("Ei löydy noin lyhyttä elokuvaa, mene vaikka ulos!")           
+    return "Ei löydy noin lyhyttä elokuvaa, mene vaikka ulos!"           
 
-check_movie_length()
+#check_movie_length(150)

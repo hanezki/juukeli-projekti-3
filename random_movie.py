@@ -1,6 +1,6 @@
 import requests
 #import json
-import random
+#import random
 import os
 from dotenv import load_dotenv
 
@@ -29,10 +29,5 @@ def random_movie_id():
         
         lista.append(idt)
 
-    leffa = random.choice(lista)
-    print(leffa)
-    return leffa
+    return lista
 
-#testiä varten:
-if __name__=="__main__":
-    random_movie_id()
