@@ -17,7 +17,7 @@ def random_movie_id():
 
     data = string.json()
 
-    item_data = data["items"]
+    item_data = data["items"] 
 
     lista = []
 
@@ -26,6 +26,7 @@ def random_movie_id():
         
         lista.append(idt)
 
-    leffa = random.choice(lista)
+    return lista
 
-    return leffa
+    # leffa = random.choice(lista)
+    # return leffa
