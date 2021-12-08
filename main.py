@@ -1,6 +1,7 @@
 import requests
 import random
 import os
+import json
 from dotenv import load_dotenv
 from random_movie import random_movie_id
 load_dotenv()
@@ -53,7 +54,12 @@ def check_movie_length(request):
         elif pituus >= elokuvan_pituus:
 
             print(f"Katso elokuva: {elokuva_fulltitle}\nPituus: {elokuvan_pituus} minuuttia, eli {elokuvan_pituus_tunteina}\nIMDB-pisteet: {imdb_rating}/10")
-            return f"{{ imdb_id: {leffa_id}, title: {elokuva_title}, lenInMin: {elokuvan_pituus}, lenInHrs: {elokuvan_pituus_tunteina}, imdb_rating: {imdb_rating}/10, image: {elokuva_kuva_url} }} "
+            
+            elokuva_dict = {"imdb_id": leffa_id, "title": elokuva_title, "lenInMin": elokuvan_pituus, "lenInHrs": elokuvan_pituus_tunteina, "imdb_rating": f"{imdb_rating}/10", "image_url": elokuva_kuva_url}
+
+            elokuva_json = json.dumps(elokuva_dict)
+
+            return elokuva_json
     
     # jos laskuri menee nollaan, eikä sopivan pituista elokuvaa löydy    
     return "Ei löydy noin lyhyttä elokuvaa, mene vaikka ulos!"           
