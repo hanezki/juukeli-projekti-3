@@ -1,5 +1,3 @@
-
-
 import requests
 import random
 import os
@@ -10,7 +8,7 @@ API_KEY=os.getenv("API_KEY")
 
 # funktio-kysely, minkä pituisen elokuvan haluaa katsoa
 def select_length():
-    pituus = 120 #input("Minkä pituisen elokuvan maksimissaan haluat katsoa? Anna vastaus minuutteina: ")
+    pituus = 160 #input("Minkä pituisen elokuvan maksimissaan haluat katsoa? Anna vastaus minuutteina: ")
     return pituus    
 
 # funktio etsii top 250 listasta annettuun pituuteen sopivaa elokuvaa
@@ -18,7 +16,7 @@ def check_movie_length():
     pituus = select_length()
     lista = random_movie_id()
 
-    laskuri = 50
+    laskuri = 25
 
     # hakee laskurin määrän verran, löytyykö sopiva elokuvia listasta
     while laskuri > 0:

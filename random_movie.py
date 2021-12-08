@@ -1,6 +1,4 @@
 import requests
-#import json
-#import random
 import os
 from dotenv import load_dotenv
 
@@ -8,9 +6,7 @@ load_dotenv()
 
 #suoritetaan kerran
 def random_movie_id():
-    #payload = {}
-    #headers= {}
-
+    
     API_KEY=os.getenv("API_KEY")
 
     string = requests.get(f"https://imdb-api.com/en/API/Top250Movies/{API_KEY}")
