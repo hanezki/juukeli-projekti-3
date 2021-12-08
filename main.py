@@ -1,24 +1,37 @@
-
-
 import requests
 import random
 import os
+from flask import jsonify
 from dotenv import load_dotenv
-from random_movie import random_movie_id
+from requests.api import request
+
 load_dotenv()
-API_KEY=os.getenv("API_KEY")
+API_KEY=os.getenv("API_KEY")    
 
-# funktio-kysely, minkä pituisen elokuvan haluaa katsoa
-def select_length():
-    pituus = 120 #input("Minkä pituisen elokuvan maksimissaan haluat katsoa? Anna vastaus minuutteina: ")
-    return pituus    
+# kysyy elokuvan pituuden
+def select_length(request):
+    request_json = request.get_json() 
+    output = request_json['input']   
+    print(jsonify(output))
+ 
+# funktio tekee listan top250 elokuvan id:istä   
+def random_movie_id(): 
+    string = requests.get(f"https://imdb-api.com/en/API/Top250Movies/{API_KEY}")
+    data = string.json()
+    item_data = data["items"] 
+    lista = []
 
-# funktio etsii top 250 listasta annettuun pituuteen sopivaa elokuvaa
-def check_movie_length():  
-    pituus = select_length()
+    for i in range(len(item_data)):
+        idt = item_data[i]["id"]        
+        lista.append(idt)
+    return lista
+
+# funktio etsii listasta annettuun pituuteen sopivaa elokuvaa    
+def check_movie_length():
     lista = random_movie_id()
+    pituus = select_length('12')
 
-    laskuri = 50
+    laskuri = 25
 
     # hakee laskurin määrän verran, löytyykö sopiva elokuvia listasta
     while laskuri > 0:
