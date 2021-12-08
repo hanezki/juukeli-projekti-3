@@ -71,14 +71,14 @@ resource "google_cloudfunctions_function_iam_member" "invoker" {
 }
 
 #Luodaan API Gateway
-resource "google_api_gateway_api" "api_gw" {
+resource "google_api_gateway_api" "elokuva_api" {
   provider = google-beta
   api_id = "elokuva-api"
 }
 
-resource "google_api_gateway_api_config" "api_gw" {
+resource "google_api_gateway_api_config" "elokuva_api" {
   provider = google-beta
-  api = google_api_gateway_api.api_gw.api_id
+  api = google_api_gateway_api.elokuva_api.api_id
   api_config_id = "config"
 
   openapi_documents {
@@ -92,10 +92,10 @@ resource "google_api_gateway_api_config" "api_gw" {
   }
 }
 
-resource "google_api_gateway_gateway" "api_gw" {
+resource "google_api_gateway_gateway" "elokuva_api" {
   provider = google-beta
-  api_config = google_api_gateway_api_config.api_gw.id
-  gateway_id = "api-gw"
+  api_config = google_api_gateway_api_config.elokuva_api.id
+  gateway_id = "elokuva-gateway"
 }
 
 
@@ -136,13 +136,13 @@ EOF
 
 #ladataan cloudruniin image (jossa nettisivu?)
 resource "google_cloud_run_service" "default" {
-  name     = "cloudrun-srv"
+  name     = "cloudrun-elokuva"
   location = "us-central1"
 
   template {
     spec {
       containers {
-        image = "us-docker.pkg.dev/cloudrun/container/hello" //nettisivun dockerimage
+        image = "us-docker.pkg.dev/cloudrun/container/hello" //nettisivun dockerimage tähän
       }
     }
   }
