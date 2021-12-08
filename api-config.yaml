@@ -1,0 +1,22 @@
+# openapi2-functions.yaml
+swagger: '2.0'
+info:
+  title: Elokuva Api Gateway
+  description: Elokuva-apin testitiedosto, voi juukeli
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /movie: 
+    get:
+      summary: Hakee elokuvan
+      operationId: getmovie
+      x-google-backend:
+        address: https://europe-west1-week9-2-334408.cloudfunctions.net/pick_movie #muista laittaa oikea osoite
+      responses:
+        '200':
+          description: Hakee elokuvan sen pituuden perusteella
+          schema:
+            type: string
