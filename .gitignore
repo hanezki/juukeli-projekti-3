@@ -367,3 +367,4 @@ terraform.*
 .terraform.*
 /.terraform
 variable.tf
+.tfvars
