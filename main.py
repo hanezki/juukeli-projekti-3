@@ -56,4 +56,4 @@ def check_movie_length(request):
     # jos laskuri menee nollaan, eikä sopivan pituista elokuvaa löydy    
     return "Ei löydy noin lyhyttä elokuvaa, mene vaikka ulos!"           
 
-#check_movie_length(150)
+check_movie_length(150)

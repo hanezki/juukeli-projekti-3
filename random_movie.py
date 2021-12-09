@@ -25,7 +25,7 @@ def random_movie_id():
     lista = []
 
     for i in range(len(item_data)):
-        idt = item_data[i]["title"]
+        idt = item_data[i]["id"]
         
         lista.append(idt)
 

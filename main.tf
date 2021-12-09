@@ -106,17 +106,7 @@ resource "google_workflows_workflow" "example_workflow" {
   name          = "workflow"
   description   = "This works by magic"
   source_contents = <<-EOF
-  # This is a sample workflow, feel free to replace it with your source code
-  #
-  # This workflow does the following:
-  # - reads current time and date information from an external API and stores
-  #   the response in CurrentDateTime variable
-  # - retrieves a list of Wikipedia articles related to the day of the week
-  #   from CurrentDateTime
-  # - returns the list of articles as an output of the workflow
-  # FYI, In terraform you need to escape the $$ or it will cause errors.
-
-  - getCurrentTime:
+   - getCurrentTime:
       call: http.get
       args:
           url: https://us-central1-workflowsample.cloudfunctions.net/datetime
