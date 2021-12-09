@@ -1,6 +1,4 @@
 import requests
-#import json
-#import random
 import os
 from dotenv import load_dotenv
 
@@ -8,10 +6,7 @@ load_dotenv()
 
 #suoritetaan kerran
 def random_movie_id():
-    #payload = {}
-    #headers= {}
-
-    #alla oleva kommentoitu pois. Käytetään ympäristömuuttujia cloud functionissa
+    
     API_KEY=os.getenv("API_KEY")
     
     #API_KEY=os.environ.get('API_KEY')
