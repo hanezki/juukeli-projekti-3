@@ -17,7 +17,6 @@ def select_length():
 def check_movie_length():  
     pituus = select_length()
     lista = random_movie_id()
-
     laskuri = 50
 
     # hakee laskurin määrän verran, löytyykö sopiva elokuvia listasta
