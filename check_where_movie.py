@@ -1,6 +1,6 @@
 #import requests
-from logging import error
-from dotenv.main import dotenv_values
+#from logging import error
+#from dotenv.main import dotenv_values
 import requests
 import os
 from dotenv import load_dotenv
@@ -11,11 +11,10 @@ load_dotenv()
 stored_ids = "stored_ids.json"
 API_KEY = os.getenv("API_KEY2")
 
-def check_where_movie():
+def check_where_movie(leffa_id):
     
     #Etsi watchmode API:sta tietyllä imdb id:llä elokuva
-    
-    search_request = requests.get(f"https://api.watchmode.com/v1/search/?apiKey={API_KEY}&search_field=imdb_id&search_value=tt0076759")
+    search_request = requests.get(f"https://api.watchmode.com/v1/search/?apiKey={API_KEY}&search_field=imdb_id&search_value={leffa_id}")
 
     data = search_request.json()
 
@@ -37,7 +36,7 @@ def check_where_movie():
 
     sources_list = list(dict.fromkeys(sources_list))
     
-    find_sources_from_file(sources_list)
+    return find_sources_from_file(sources_list)
     
 
 #etsi source idllä jsonista sourcejen nimiä.
@@ -58,9 +57,9 @@ def find_sources_from_file(ids_to_find):
                 
             else:
                 add_sources_to_file(ids_to_find)
-            return source_names
+        return source_names
     except FileNotFoundError:
-        create_new_file(ids_to_find)
+        create_new_file(ids_to_find) #palauttaako tässä kohtaa mitään?
 
 
 
@@ -82,10 +81,7 @@ def add_sources_to_file(ids_to_find):
         name = data[i]["name"]
         sources[id] = name
 
-    
     json_object = json.dumps(sources, indent=2)
-
-    
 
     try:
         with open(stored_ids, "w") as outfile:
@@ -97,4 +93,6 @@ def add_sources_to_file(ids_to_find):
 
 
 
-check_where_movie()
+#muuttuja = check_where_movie("tt0076759")
+
+#print(muuttuja)

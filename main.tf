@@ -44,7 +44,7 @@ resource "google_storage_bucket_object" "movies" {
   source    = "./movies.zip"
 }
 
-#TODO nimea funktio paremmin ja kirjoita parempi kuvaus
+#luo funktion zipistä
 resource "google_cloudfunctions_function" "function" {
   provider    = google
   name        = "pick_movie"
@@ -59,7 +59,7 @@ resource "google_cloudfunctions_function" "function" {
 }
 
 # IAM entry for all users to invoke the function
-#tää pitää olla jotta on julkisesti saatavilla
+# tää pitää olla jotta on julkisesti saatavilla
 resource "google_cloudfunctions_function_iam_member" "invoker" {
   provider       = google
   project        = google_cloudfunctions_function.function.project
@@ -76,6 +76,7 @@ resource "google_api_gateway_api" "elokuva_api" {
   api_id = "elokuva-api"
 }
 
+#api gateway
 resource "google_api_gateway_api_config" "elokuva_api" {
   provider = google-beta
   api = google_api_gateway_api.elokuva_api.api_id
@@ -99,7 +100,8 @@ resource "google_api_gateway_gateway" "elokuva_api" {
 }
 
 
-#Luodaan placeholder workflow
+#Workflow
+#TODO oikea workflow tähän ja kuvaus ja nimi kuntoon
 resource "google_workflows_workflow" "example_workflow" {
   provider      = google-beta
   region        = "us-central1"

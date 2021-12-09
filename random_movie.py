@@ -1,8 +1,8 @@
 import requests
 import os
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-#load_dotenv()
+load_dotenv()
 
 #suoritetaan kerran
 def random_movie_id():
@@ -23,9 +23,11 @@ def random_movie_id():
     lista = []
 
     for i in range(len(item_data)):
-        idt = item_data[i]["title"]
+        idt = item_data[i]["id"]
         
         lista.append(idt)
 
     return lista
+
+print(random_movie_id())
 
