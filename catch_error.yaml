@@ -1,0 +1,29 @@
+- read_item:
+    try:
+      call: http.get
+      args:
+        url: https://europe-west1-week9-2-334408.cloudfunctions.net/pick_movie
+        auth:
+          type: OIDC
+      result: API_response
+    except:
+      as: e
+      steps:
+        - known_errors:
+            switch:
+              - condition: ${not("HttpError" in e.tags)}
+                next: connection_problem
+              - condition: ${e.code == 404}
+                next: url_not_found
+              - condition: ${e.code == 403}
+                next: auth_problem
+        - unhandled_exception:
+            raise: ${e}
+- url_found:
+    return: ${API_response.body}
+- connection_problem:
+    return: "Connection problem; check URL"
+- url_not_found:
+    return: "Sorry, URL wasn't found"
+- auth_problem:
+    return: "Authentication error"
