@@ -49,7 +49,7 @@ def check_movie_length(request):
         elokuva_kuva_url = data["image"]
 
         #tämä palauttaisi että missä palvelussa olisi saatavilla TAI että onko saatavilla netflixissä
-        saatavuus = check_where_movie(leffa_id)
+
 
         # jos valittu satunnainen elokuva on pidempi kuin annettu pituus, 
         # laskuria vähennetään ja palataan silmukan alkuun hakemaan uusi satunnainen elokuva
@@ -60,10 +60,7 @@ def check_movie_length(request):
         # tulostetaan elokuvan nimi, pituus ja imdb-pisteet
         elif pituus >= elokuvan_pituus:
 
-            #print(f"Katso elokuva: {elokuva_fulltitle}\nPituus: 
-            #{elokuvan_pituus} minuuttia, eli {elokuvan_pituus_tunteina}\nIMDB-pisteet: {imdb_rating}/10")
-
-            #print(saatavuus)
+            saatavuus = check_where_movie(leffa_id)
             
             elokuva_dict = {"imdb_id": leffa_id, "title": elokuva_title, "lenInMin": elokuvan_pituus, "lenInHrs": elokuvan_pituus_tunteina, "imdb_rating": f"{imdb_rating}/10", "image_url": elokuva_kuva_url, "availibility": saatavuus}
 
