@@ -102,37 +102,41 @@ resource "google_api_gateway_gateway" "elokuva_api" {
 
 #Workflow
 #TODO oikea workflow tähän ja kuvaus ja nimi kuntoon
-resource "google_workflows_workflow" "example_workflow" {
+resource "google_workflows_workflow" "catch_error" {
   provider      = google-beta
   region        = "us-central1"
   name          = "workflow"
   description   = "This works by magic"
   source_contents = <<-EOF
-  # This is a sample workflow, feel free to replace it with your source code
-  #
-  # This workflow does the following:
-  # - reads current time and date information from an external API and stores
-  #   the response in CurrentDateTime variable
-  # - retrieves a list of Wikipedia articles related to the day of the week
-  #   from CurrentDateTime
-  # - returns the list of articles as an output of the workflow
-  # FYI, In terraform you need to escape the $$ or it will cause errors.
-
-  - getCurrentTime:
-      call: http.get
-      args:
-          url: https://us-central1-workflowsample.cloudfunctions.net/datetime
-      result: CurrentDateTime
-  - readWikipedia:
-      call: http.get
-      args:
-          url: https://en.wikipedia.org/w/api.php
-          query:
-              action: opensearch
-              search: $${CurrentDateTime.body.dayOfTheWeek}
-      result: WikiResult
-  - returnOutput:
-      return: $${WikiResult.body[1]}
+    - read_item:
+        try:
+        call: http.get
+        args:
+            url: https://europe-west1-week9-2-334408.cloudfunctions.net/pick_movie
+            auth:
+            type: OIDC
+        result: API_response
+        except:
+        as: e
+        steps:
+            - known_errors:
+                switch:
+                - condition: ${not("HttpError" in e.tags)}
+                    next: connection_problem
+                - condition: ${e.code == 404}
+                    next: url_not_found
+                - condition: ${e.code == 403}
+                    next: auth_problem
+            - unhandled_exception:
+                raise: ${e}
+    - url_found:
+        return: ${API_response.body}
+    - connection_problem:
+        return: "Connection problem; check URL"
+    - url_not_found:
+        return: "Sorry, URL wasn't found"
+    - auth_problem:
+        return: "Authentication error"
 EOF
 }
 

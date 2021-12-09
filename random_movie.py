@@ -6,10 +6,7 @@ load_dotenv()
 
 #suoritetaan kerran
 def random_movie_id():
-    #payload = {}
-    #headers= {}
-
-    #alla oleva kommentoitu pois. Käytetään ympäristömuuttujia cloud functionissa
+    
     API_KEY=os.getenv("API_KEY")
     
     #API_KEY=os.environ.get('API_KEY')
@@ -29,5 +26,5 @@ def random_movie_id():
 
     return lista
 
-print(random_movie_id())
-
+#if __name__=="__main__":
+#    print(random_movie_id())

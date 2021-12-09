@@ -60,7 +60,8 @@ def check_movie_length(request):
         # tulostetaan elokuvan nimi, pituus ja imdb-pisteet
         elif pituus >= elokuvan_pituus:
 
-            #print(f"Katso elokuva: {elokuva_fulltitle}\nPituus: {elokuvan_pituus} minuuttia, eli {elokuvan_pituus_tunteina}\nIMDB-pisteet: {imdb_rating}/10")
+            #print(f"Katso elokuva: {elokuva_fulltitle}\nPituus: 
+            #{elokuvan_pituus} minuuttia, eli {elokuvan_pituus_tunteina}\nIMDB-pisteet: {imdb_rating}/10")
 
             #print(saatavuus)
             
