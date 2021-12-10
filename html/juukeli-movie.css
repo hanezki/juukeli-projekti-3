@@ -44,15 +44,14 @@ header h1{
 	text-align: justify;
 	line-height: 25px;
 	font-size: medium;
-	padding-left: 15%;
-	padding-right: 15%;
-	padding-top: 5%;
+	padding-top: 3%;
 	padding-bottom: 5%;
+	width:100%;
 }
 
 #haku{
 	font-size:20px;
-	padding-top: 5%;
+	padding-top: 20px;
 	padding-bottom: 25px;
 }
 
@@ -90,6 +89,13 @@ input[type=text]:focus{
 	color: #FFFFFF;
 	cursor: pointer;
 }
+
+.tulos{
+	padding-left: 25%;
+	padding-right: 25%;
+}
+
+
 
 footer{
 	color: #000;

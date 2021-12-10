@@ -6,8 +6,13 @@ load_dotenv()
 
 #suoritetaan kerran
 def random_movie_id():
+    #payload = {}
+    #headers= {}
+
+    #alla oleva kommentoitu pois. Käytetään ympäristömuuttujia cloud functionissa
+    #API_KEY=os.getenv("API_KEY")
     
-    API_KEY=os.getenv("API_KEY")
+    API_KEY=os.environ.get('API_KEY')
 
     string = requests.get(f"https://imdb-api.com/en/API/Top250Movies/{API_KEY}")
 
