@@ -12,14 +12,14 @@ storage_client = storage.Client()
 load_dotenv()
 
 stored_ids = "stored_ids.json"
-bucket_name = os.getenv("BUCKET_NAME")
-API_KEY = os.getenv("API_KEY2")
+bucket_name = os.environ.get("BUCKET_NAME")
+API_KEY=os.environ.get("API_KEY2")
 
-def check_where_movie():
+def check_where_movie(leffa_id):
     
     #Etsi watchmode API:sta tietyllä imdb id:llä elokuva
     
-    search_request = requests.get(f"https://api.watchmode.com/v1/search/?apiKey={API_KEY}&search_field=imdb_id&search_value=tt0076759")
+    search_request = requests.get(f"https://api.watchmode.com/v1/search/?apiKey={API_KEY}&search_field=imdb_id&search_value={leffa_id}")
 
     data = search_request.json()
 
@@ -192,5 +192,3 @@ def write_to_bucket(json_to_write):
             time.sleep(1)
 
 
-
-print(check_where_movie())
