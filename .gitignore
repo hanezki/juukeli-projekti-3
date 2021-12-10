@@ -358,3 +358,13 @@ MigrationBackup/
 
 #Environment values
 .env
+
+#elokuva-zip
+movies.zip
+
+#terraform-filut
+terraform.*
+.terraform.*
+/.terraform
+variable.tf
+.tfvars

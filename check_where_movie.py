@@ -12,7 +12,7 @@ storage_client = storage.Client()
 load_dotenv()
 
 stored_ids = "stored_ids.json"
-bucket_name = os.environ.get("BUCKET_NAME")
+bucket_name = "juukeli-ampari"
 API_KEY=os.environ.get("API_KEY2")
 
 def check_where_movie(leffa_id):
@@ -190,5 +190,6 @@ def write_to_bucket(json_to_write):
         else:
             print("fileä ei ole olemassa vielä")
             time.sleep(1)
+
 
 
